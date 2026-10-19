@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a JavaScript (JS)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 40px 20px;
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Clase para el modo claro alternable con JS */
+        body.modo-claro {
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .js-badge {
+            display: inline-block;
+            background-color: #f7df1e;
+            color: #000;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #94a3b8;
+        }
+
+        .card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        body.modo-claro .card {
+            background-color: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h2 {
+            font-size: 18px;
+            color: #38bdf8;
+            margin-bottom: 6px;
+        }
+
+        .card p.desc {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        body.modo-claro .card p.desc {
+            color: #64748b;
+        }
+
+        /* Botones e inputs */
+        button {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0284c7;
+            color: #fff;
+        }
+
+        input[type="text"] {
+            padding: 10px 14px;
+            background-color: #0b1120;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            margin-right: 8px;
+        }
+
+        body.modo-claro input[type="text"] {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+            color: #0f172a;
+        }
+
+        .resultado-box {
+            background-color: #0b1120;
+            border: 1px dashed #334155;
+            border-radius: 8px;
+            padding: 14px;
+            margin-top: 15px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #a5f3fc;
+        }
+
+        body.modo-claro .resultado-box {
+            background-color: #f1f5f9;
+            border-color: #cbd5e1;
+            color: #0369a1;
+        }
+
+        /* Contador */
+        .contador-display {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #f59e0b;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn-danger {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-warning {
+            background-color: #64748b;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #475569;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <span class="js-badge">JAVASCRIPT BÁSICO</span>
+            <h1>Introducción a JavaScript</h1>
+            <p>Aprende a manipular la página, responder a clics y manejar variables</p>
+        </header>
+
+        <!-- 1. Interacción con inputs y texto -->
+        <div class="card">
+            <h2>1. Saludo Personalizado (Variables y DOM)</h2>
+            <p class="desc">Escribe tu nombre y haz clic para que JavaScript lea el valor y modifique el texto en pantalla.</p>
+            
+            <input type="text" id="inputNombre" placeholder="Escribe tu nombre...">
+            <button onclick="saludar()">Saludar con JS</button>
+
+            <div class="resultado-box" id="cajaSaludo">
+                Esperando tu nombre...
+            </div>
+        </div>
+
+        <!-- 2. Contador interactivo -->
+        <div class="card">
+            <h2>2. Contador Interactivo (Operaciones Matemáticas)</h2>
+            <p class="desc">Usa una variable numérica en JavaScript para sumar, restar o reiniciar el contador.</p>
+            
+            <div class="contador-display" id="valorContador">0</div>
+
+            <div class="btn-group">
+                <button class="btn-danger" onclick="restar()">- Restar</button>
+                <button class="btn-warning" onclick="reiniciar()">Reiniciar</button>
+                <button onclick="sumar()">+ Sumar</button>
+            </div>
+        </div>
+
+        <!-- 3. Cambio de Estilo en tiempo real -->
+        <div class="card">
+            <h2>3. Cambiador de Tema (Modificar clases CSS con JS)</h2>
+            <p class="desc">Alterna entre el Modo Oscuro y el Modo Claro usando <code>classList.toggle()</code>.</p>
+            
+            <button onclick="cambiarTema()">🌓 Alternar Modo Claro / Oscuro</button>
+        </div>
+
+        <!-- 4. Consola del navegador -->
+        <div class="card">
+            <h2>4. Mensaje a la Consola (`console.log`)</h2>
+            <p class="desc">Abre las herramientas de desarrollador en tu navegador (presiona <code>F12</code> $\rightarrow$ pestaña <strong>Console</strong>) y haz clic en el botón.</p>
+            
+            <button onclick="enviarConsola()">Enviar mensaje a la consola</button>
+        </div>
+
+    </div>
+
+    <!-- ========================================================
+         CÓDIGO JAVASCRIPT
+         ======================================================== -->
+    <script>
+        // 1. FUNCIÓN SALUDAR (Leer input y cambiar texto)
+        function saludar() {
+            // Obtenemos el texto ingresado en el input
+            let nombre = document.getElementById("inputNombre").value;
+
+            // Validación con if/else
+            if (nombre.trim() === "") {
+                document.getElementById("cajaSaludo").innerText = "⚠️ Por favor, ingresa un nombre primero.";
+            } else {
+                // Modificamos el contenido del elemento
+                document.getElementById("cajaSaludo").innerText = "¡Hola, " + nombre + "! Bienvenido al mundo de JavaScript 🚀";
+            }
+        }
+
+        // 2. CONTADOR (Manejo de variables numéricas)
+        let contador = 0;
+
+        function sumar() {
+            contador++; // Incrementa en 1
+            actualizarPantalla();
+        }
+
+        function restar() {
+            contador--; // Decrementa en 1
+            actualizarPantalla();
+        }
+
+        function reiniciar() {
+            contador = 0; // Vuelve a 0
+            actualizarPantalla();
+        }
+
+        function actualizarPantalla() {
+            document.getElementById("valorContador").innerText = contador;
+        }
+
+        // 3. CAMBIAR TEMA (Manipulación de clases CSS)
+        function cambiarTema() {
+            // Agrega o quita la clase 'modo-claro' del <body>
+            document.body.classList.toggle("modo-claro");
+        }
+
+        // 4. CONSOLA
+        function enviarConsola() {
+            console.log("¡Hola desde la consola de JavaScript! Este mensaje fue impreso con console.log()");
+            alert("¡Mensaje enviado a la consola! Presiona F12 para verlo.");
+        }
+    </script>
+
+</body>
+</html>
